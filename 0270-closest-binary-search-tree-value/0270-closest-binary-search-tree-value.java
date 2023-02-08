@@ -14,28 +14,26 @@
  * }
  */
 class Solution {
-    double closeDiff;
+    int min =0;
+    double minDiff = Double.MAX_VALUE;
     public int closestValue(TreeNode root, double target) {
-        int close = root.val;
-         closeDiff = Math.abs(root.val - target);
-        List<Integer> list = new ArrayList<>();
-        inorder(root, list);
-        for(int val: list){
-            double d = Math.abs(val - target);
-            if(d < closeDiff){
-                close = val;
-                closeDiff = d;
-            }
-        }
-        return close;
+        if(root == null) return 0;
+        
+        helper(root, target);
+        return min;
     }
-    public void inorder(TreeNode node, List<Integer> ans){
+    
+    
+    public void helper(TreeNode node, double target){
         if(node == null) return;
-        inorder(node.left, ans);
+        double d = Math.abs(node.val - target);
+        if(d < minDiff){
+            min = node.val;
+            minDiff = d;
+        }
         
-        ans.add(node.val);
         
-        inorder(node.right, ans);
-        
+        helper(node.left, target);
+        helper(node.right, target);
     }
 }
