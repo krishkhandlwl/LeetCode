@@ -14,23 +14,23 @@
  * }
  */
 class Solution {
-    String str = "";
+    StringBuffer str = new StringBuffer();
     public String tree2str(TreeNode root) {
         preorder(root);
-        return str;
+        return str.toString();
     }
     public void preorder(TreeNode node){
         if(node == null) return;
-        str += node.val;
+        str.append(node.val);
         if(node.left!= null || node.right != null){
-            str += "(";
+             str.append("(");
             preorder(node.left);
-            str += ")";
+             str.append(")");
         }
         if(node.right != null){
-            str += "(";
+             str.append("(");
             preorder(node.right);
-            str += ")";
+             str.append(")");
         }
     }
 }
